@@ -22,7 +22,12 @@ export default function RootLayout({ children }) {
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <div className="min-h-screen flex flex-col max-w-3xl mx-auto px-4">
+          {/* Header appears on ALL pages */}
+          {/* Main content area */}
+          <main className="flex-grow">{children}</main>
+          {/* Footer appears on ALL pages */}
+        </div>
       </body>
     </html>
   );
