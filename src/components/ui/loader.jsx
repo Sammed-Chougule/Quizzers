@@ -1,7 +1,6 @@
 "use client";
 import { motion } from "motion/react";
 import React from "react";
-import { SparklesCore } from "../ui/sparkles";
 
 export const LoaderOne = () => {
   const transition = (x) => {
@@ -14,49 +13,35 @@ export const LoaderOne = () => {
     };
   };
   return (
-    <div
-      className="h-screen relative w-full bg-black flex flex-col items-center justify-center overflow-hidden rounded-md">
-      <div className="w-full absolute inset-0 h-screen">
-        <SparklesCore
-          id="tsparticlesfullpage"
-          background="transparent"
-          minSize={0.6}
-          maxSize={1.4}
-          particleDensity={100}
-          className="w-full h-full"
-          particleColor="#FFFFFF" />
-      </div>
-      <div className="flex items-center gap-2">
-        <motion.div
-          initial={{
-            y: 0,
-          }}
-          animate={{
-            y: [0, 10, 0],
-          }}
-          transition={transition(0)}
-          className="h-4 w-4 rounded-full border border-neutral-300 bg-gradient-to-b from-neutral-400 to-neutral-300" />
-        <motion.div
-          initial={{
-            y: 0,
-          }}
-          animate={{
-            y: [0, 10, 0],
-          }}
-          transition={transition(1)}
-          className="h-4 w-4 rounded-full border border-neutral-300 bg-gradient-to-b from-neutral-400 to-neutral-300" />
-        <motion.div
-          initial={{
-            y: 0,
-          }}
-          animate={{
-            y: [0, 10, 0],
-          }}
-          transition={transition(2)}
-          className="h-4 w-4 rounded-full border border-neutral-300 bg-gradient-to-b from-neutral-400 to-neutral-300" />
-      </div>
+    <div className="flex items-center gap-2">
+      <motion.div
+        initial={{
+          y: 0,
+        }}
+        animate={{
+          y: [0, 10, 0],
+        }}
+        transition={transition(0)}
+        className="h-4 w-4 rounded-full border border-neutral-300 bg-gradient-to-b from-neutral-400 to-neutral-300" />
+      <motion.div
+        initial={{
+          y: 0,
+        }}
+        animate={{
+          y: [0, 10, 0],
+        }}
+        transition={transition(1)}
+        className="h-4 w-4 rounded-full border border-neutral-300 bg-gradient-to-b from-neutral-400 to-neutral-300" />
+      <motion.div
+        initial={{
+          y: 0,
+        }}
+        animate={{
+          y: [0, 10, 0],
+        }}
+        transition={transition(2)}
+        className="h-4 w-4 rounded-full border border-neutral-300 bg-gradient-to-b from-neutral-400 to-neutral-300" />
     </div>
-
   );
 };
 
