@@ -11,7 +11,6 @@ export default function Page() {
   return (
     <div>
       <HeroSectionOne />
-      welcome to quizzers
     </div>
   );
 }

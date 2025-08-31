@@ -92,7 +92,7 @@ export function HeroSectionOne() {
                             delay: 0.8,
                         }}
                         className="relative z-10 mx-auto max-w-xl py-4 text-center text-lg font-normal text-neutral-600 dark:text-neutral-400">
-                        Build rock-solid JavaScript skills at warp speed
+                        Build rock-solid any skills at warp speed
                     </motion.p>
 
 
