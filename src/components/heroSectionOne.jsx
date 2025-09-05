@@ -108,8 +108,9 @@ const Navbar = () => {
         <nav
             className="flex w-full items-center justify-between border-t border-b border-neutral-200 px-4 py-4 dark:border-neutral-800">
             <div className="flex items-center gap-2">
-                <div
-                    className="size-7 rounded-full bg-gradient-to-br from-violet-500 to-pink-500" />
+
+                <div />
+                <img src="/quizzers_logo.png" alt="Logo" className="h-8 w-8 md:h-12 md:w-12" />
                 <h1 className="text-base font-bold md:text-2xl">Quizzers</h1>
             </div>
             <button

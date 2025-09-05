@@ -7,6 +7,8 @@ export function PlaceholdersAndVanishInputDemo() {
   const [quizType, setQuizType] = useState("");
   const [apiResponse, setApiResponse] = useState("");
   const [loading, setLoading] = useState(false);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selectedOptions, setSelectedOptions] = useState({});
 
   const placeholders = [
     "Write Any type for quiz",
@@ -45,7 +47,6 @@ JSON FORMAT REQUIRED:
         },
         "correctAnswer": "A",
         "explanation": "Brief explanation why this is correct",
-        "difficulty": "easy"
       }
     ]
   }
@@ -76,14 +77,21 @@ Generate quiz for: "${topic}"`;
       });
 
       const data = await response.json();
+      console.log("Raw API response:", data);
 
-      try {
-        const quizData = JSON.parse(data.response);
-        setApiResponse(JSON.stringify(quizData, null, 2));
-      } catch (parseError) {
-        setApiResponse(data.response || JSON.stringify(data, null, 2));
+      let cleanedData;
+      if (data.response && typeof data.response === 'string') {
+        cleanedData = data.response.replace(/```json\s*/, '').replace(/\s*```$/, '');
+        try {
+          const quizData = JSON.parse(cleanedData);
+          setApiResponse(JSON.stringify(quizData, null, 2));
+        } catch (parseError) {
+          console.log("Parse error:", parseError);
+          setApiResponse("Error parsing JSON: " + parseError.message);
+        }
+      } else {
+        setApiResponse(JSON.stringify(data, null, 2));
       }
-
     } catch (error) {
       setApiResponse("Error fetching quiz: " + error.message);
     }
@@ -94,7 +102,7 @@ Generate quiz for: "${topic}"`;
   return (
     !apiResponse ? (
       <div className="h-[40rem] flex flex-col justify-center items-center px-4">
-        { !loading ? (
+        {!loading ? (
           <>
             <h2 className="mb-10 sm:mb-20 text-xl text-center sm:text-5xl dark:text-white text-black">
               Ask Quizzers for a Quiz
@@ -108,15 +116,79 @@ Generate quiz for: "${topic}"`;
           </>
         ) : (
           <LoaderFive text="Generating Quiz..." />
-        ) }
+        )}
       </div>
     ) : (
       <div className="h-[40rem] flex flex-col justify-center items-center px-4">
         <h2 className="mb-10 sm:mb-20 text-xl text-center sm:text-5xl dark:text-white text-black">
-          Your quiz is ready!
+          {(() => {
+            try {
+              const quizObj = JSON.parse(apiResponse);
+              return `Your quiz is ready for the : ${quizObj.quiz.topic}`;
+            } catch {
+              return "Your quiz is ready!";
+            }
+          })()}
         </h2>
         <div className="mt-4 p-4 bg-white rounded text-left w-full max-w-4xl overflow-auto">
-          {apiResponse}
+          {(() => {
+            try {
+              const quizObj = JSON.parse(apiResponse);
+              const questions = quizObj.quiz.questions;
+              const totalQuestions = questions.length;
+              const q = questions[currentQuestion];
+              return (
+                <>
+                  <div className="bg-gray-50 border rounded-lg p-4 shadow mb-6">
+                    <div className="font-semibold mb-2">Q{currentQuestion + 1}. {q.question}</div>
+                    <div className="mb-2">
+                      {Object.entries(q.options).map(([key, value]) => (
+                        <label key={key} className="block cursor-pointer mb-1">
+                          <input
+                            type="radio"
+                            name={`question-${q.id}`}
+                            value={key}
+                            checked={selectedOptions[q.id] === key}
+                            onChange={() => setSelectedOptions({ ...selectedOptions, [q.id]: key })}
+                            className="mr-2 accent-blue-500"
+                          />
+                          {value}
+                        </label>
+                      ))}
+                    </div>
+                    <div className="text-sm text-blue-700">Explanation: {q.explanation}</div>
+                  </div>
+                  <div className="flex justify-between items-center mt-4">
+                    <button
+                      onClick={() => setCurrentQuestion((prev) => Math.max(prev - 1, 0))}
+                      disabled={currentQuestion === 0}
+                      className="px-4 py-2 bg-blue-500 text-whit rounded-lg disabled:opacity-50"
+                    >
+                      {`<<`}
+                    </button>
+                    <span className="text-lg font-semibold">{currentQuestion + 1} / {totalQuestions}</span>
+                    <button
+                      onClick={() => setCurrentQuestion((prev) => Math.min(prev + 1, totalQuestions - 1))}
+                      disabled={currentQuestion === totalQuestions - 1}
+                      className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
+                    >
+                      {`>>`}
+                    </button>
+                    <button
+                      onClick={() => setCurrentQuestion((prev) => Math.min(prev + 1, totalQuestions - 1))}
+                      hidden={!(currentQuestion === totalQuestions - 1)}
+                      className="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 disabled:opacity-50"
+                    >
+                      Submit
+                    </button>
+
+                  </div>
+                </>
+              );
+            } catch {
+              return <pre>{apiResponse}</pre>;
+            }
+          })()}
         </div>
         <button
           onClick={() => {
