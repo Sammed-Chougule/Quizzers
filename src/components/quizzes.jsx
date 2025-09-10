@@ -18,7 +18,6 @@ export default function Quizzes({ apiResponse, selectedOptions, setSelectedOptio
 
     return (
       <>
-        <BackgroundRippleEffect />
         <h2 className="mb-6 text-xl md:text-3xl font-bold text-center">
           Your quiz for the Topic
           <span className="block font-bold text-blue-500 text-lg md:text-3xl mt-1">{quizObj.quiz.topic}</span>
