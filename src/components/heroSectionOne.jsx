@@ -1,11 +1,13 @@
 "use client";
 import { motion } from "motion/react";
 import Link from 'next/link';
+import { BackgroundRippleEffect } from "./ui/background-ripple-effect";
 
 
 export function HeroSectionOne() {
     return (
         <div>
+            <BackgroundRippleEffect />
             <Navbar />
             <div
                 className="absolute inset-y-0 left-0 h-full w-px bg-neutral-200/80 dark:bg-neutral-800/80">
@@ -25,22 +27,20 @@ export function HeroSectionOne() {
             <div className="px-4 py-10 md:py-20">
                 <h1
                     className="relative z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-slate-700 md:text-4xl lg:text-7xl dark:text-slate-300">
-                    {"Master Any Topic in days, not months"
-                        .split(" ")
-                        .map((word, index) => (
-                            <motion.span
-                                key={index}
-                                initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
-                                animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-                                transition={{
-                                    duration: 0.3,
-                                    delay: index * 0.1,
-                                    ease: "easeInOut",
-                                }}
-                                className="mr-2 inline-block">
-                                {word}
-                            </motion.span>
-                        ))}
+                    {["Master", "Any", "Topic", "in", "days,", "not", "months", "with", "Quizzers"].map((word, index) => (
+                        <motion.span
+                            key={index}
+                            initial={{ opacity: 0, filter: "blur(4px)", y: 10 }}
+                            animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+                            transition={{
+                                duration: 0.3,
+                                delay: index * 0.1,
+                                ease: "easeInOut",
+                            }}
+                            className={`mr-2 inline-block${word === "Quizzers" ? " text-blue-500" : ""}`}>
+                            {word}
+                        </motion.span>
+                    ))}
                 </h1>
                 <motion.p
                     initial={{
@@ -54,7 +54,7 @@ export function HeroSectionOne() {
                         delay: 0.8,
                     }}
                     className="relative z-10 mx-auto max-w-xl py-4 text-center text-xl md:text-2xl font-normal text-neutral-600 dark:text-neutral-400">
-                    Quizzers generates adaptive, AI-curated quizzes that pinpoint your weak spots, so you learn exactly what you need fast.
+                    Quizzers generates adaptive, AI-curated quizzes , so you learn exactly what you need fast.
 
                 </motion.p>
                 <motion.div
@@ -72,7 +72,7 @@ export function HeroSectionOne() {
                     <Link href="/quizzes">
 
                         <button
-            className="w-60 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+            className="w-60 transform rounded-lg bg-blue-500 px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 dark:bg-white dark:text-black dark:hover:bg-gray-200">
                             Start a Free Quiz
                         </button>
                     </Link>
@@ -107,18 +107,18 @@ const Navbar = () => {
     return (
         <nav
             className="flex w-full items-center justify-between border-t border-b border-neutral-200 px-4 py-4 dark:border-neutral-800">
-            <div className="flex items-center gap-2">
+            {/* <div className="flex items-center gap-2">
 
                 <div />
                 <img src="/quizzers_logo.png" alt="Logo" className="h-8 w-8 md:h-12 md:w-12" />
                 <h1 className="text-base font-bold md:text-2xl">Quizzers</h1>
-            </div>
-            <Link href="/login">
+            </div> */}
+            {/* <Link href="/login">
             <button
                 className="w-24 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 md:w-32 dark:bg-white dark:text-black dark:hover:bg-gray-200">
                 Login
             </button>
-            </Link>
+            </Link> */}
             
         </nav>
     );
