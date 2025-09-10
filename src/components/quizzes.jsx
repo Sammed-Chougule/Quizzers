@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { BackgroundRippleEffect } from "./ui/background-ripple-effect";
+import { TypewriterEffectSmooth } from "./ui/typewriter-effect";
 
 export default function Quizzes({ apiResponse, selectedOptions, setSelectedOptions, currentQuestion, setCurrentQuestion }) {
   const [submitted, setSubmitted] = useState(false);
@@ -16,14 +17,21 @@ export default function Quizzes({ apiResponse, selectedOptions, setSelectedOptio
       }
     };
 
+    const words = [
+    {
+      text: "Quiz for the topic :-",
+    },
+    {
+      text:    ` ${quizObj.quiz.topic}`,
+      className: "text-blue-500 dark:text-blue-500",
+    },
+  ];
+
     return (
       <div className="relative w-full flex flex-col items-center justify-center">
-      
         <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
-          {/* Quiz content starts here */}
-          <h2 className="mb-6 text-2xl md:text-3xl font-bold text-center text-blue-600 dark:text-blue-400">
-            Your quiz for the Topic
-            <span className="block font-bold text-blue-500 text-lg md:text-2xl mt-1">{quizObj.quiz.topic}</span>
+          <h2 className="text-xs sm:text-base md:text-lg lg:text-2xl font-bold text-center ">
+            <TypewriterEffectSmooth words={words} />
           </h2>
           {submitted && (
             <div className="mb-4 text-xl font-bold text-green-700 bg-green-100 rounded-lg px-4 py-2 shadow">
