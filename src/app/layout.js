@@ -15,8 +15,8 @@ export const metadata = {
   title: "Quizzers - AI-Powered Adaptive Learning Platform",
   description: "Quizzers generates adaptive, AI-curated quizzes that pinpoint your weak spots, so you learn exactly what you need fast.",
   openGraph: {
-    title: "Quizzers - AI-Powered Adaptive Learning Platform",
-    description: "Generate personalized quizzes with AI and track your learning progress. Identify your weak spots and improve faster.",
+    title: "Quizzers - AI-Powered Quiz Platform",
+    description: "Generate personalized quizzes with AI . Identify your weak spots and improve faster.",
     url: "https://quizzersbysammed.vercel.app",
     siteName: "Quizzers",
     images: [

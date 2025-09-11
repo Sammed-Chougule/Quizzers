@@ -30,15 +30,39 @@ export default function Quizzes({ apiResponse, selectedOptions, setSelectedOptio
     return (
       <div className="relative w-full flex flex-col items-center justify-center">
         <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
-          <h2 className="text-xs sm:text-base md:text-lg lg:text-2xl font-bold text-center ">
+          <h2 className="text-xl font-bold text-center">
             <TypewriterEffectSmooth words={words} />
           </h2>
-          {submitted && (
-            <div className="mb-4 text-xl font-bold text-green-700 bg-green-100 rounded-lg px-4 py-2 shadow">
-              Score: {questions.filter(q => selectedOptions[q.id] === q.correctAnswer).length} / {totalQuestions}
-            </div>
-          )}
-          <div className="bg-gradient-to-br from-blue-100 via-white to-blue-200 border border-blue-300 rounded-xl p-4 shadow mb-4 w-full max-w-xl mx-auto">
+          <div className=" w-full flex space-x-1 h-8 items-center px-4">
+            {
+              Array.from({ length: totalQuestions }, (_, i) => {
+              let buttonClass = "relative w-full h-2 rounded-full transition-all duration-200 hover:h-4 ";
+              
+              if (selectedOptions[i+1]) {
+                if (submitted) {
+                  buttonClass += selectedOptions[i+1] === questions[i].correctAnswer 
+                    ? "bg-green-500" 
+                    : "bg-red-500";
+                } else {
+                  buttonClass += "bg-green-500";
+                }
+              } else {
+                buttonClass += "bg-gray-200";
+              }
+              return (
+                <div key={i+1} className="flex-1 h-8 flex items-center">
+                  <button
+                    onClick={() => setCurrentQuestion(i)}
+                    className={buttonClass}
+                  />
+                </div>
+              );
+            })}
+          </div>
+          
+          <div>
+          </div>
+          <div className=" bg-gradient-to-br from-blue-100 via-white to-blue-200 border border-blue-300 rounded-xl p-4 shadow mb-4 w-full max-w-xl mx-auto">
             <div className="font-semibold mb-2 text-base text-blue-900">Q{currentQuestion + 1}. {q.question}</div>
             <div className="mb-2">
               {Object.entries(q.options).map(([key, value]) => {
@@ -87,6 +111,11 @@ export default function Quizzes({ apiResponse, selectedOptions, setSelectedOptio
               Next
             </button>
           </div>
+          {submitted && (
+            <div className="my-2 text-xl font-bold text-green-700 bg-green-100 rounded-lg px-4 py-2 shadow">
+              Score: {questions.filter(q => selectedOptions[q.id] === q.correctAnswer).length} / {totalQuestions}
+            </div>
+          )}
           {(!submitted && allAnswered) ? (
             <button
               onClick={() => setSubmitted(true)}
@@ -96,13 +125,18 @@ export default function Quizzes({ apiResponse, selectedOptions, setSelectedOptio
               Submit Quiz
             </button>
           ) : (!submitted && !allAnswered) ? (
-            <button
-              disabled
-              title="Attempt all questions to submit"
-              className="mt-6 px-6 py-2 rounded-lg bg-green-500 text-white font-bold shadow opacity-50 cursor-not-allowed text-base"
-            >
-              Submit Quiz
-            </button>
+            <div className="relative group mt-6">
+              <button
+                disabled
+                className="px-6 py-2 rounded-lg bg-green-500 text-white font-bold shadow opacity-50 cursor-not-allowed text-base"
+              >
+                Submit Quiz
+              </button>
+              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-3 py-1 bg-gray-800 text-white text-sm rounded whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none">
+                Attempt all questions to submit
+                <div className="absolute top-full left-1/2 -translate-x-1/2 w-2 h-2 bg-gray-800 rotate-45 transform -mt-1"></div>
+              </div>
+            </div>
           ) : null}
         </div>
       </div>
