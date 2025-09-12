@@ -59,10 +59,9 @@ export default function Quizzes({ apiResponse, selectedOptions, setSelectedOptio
               );
             })}
           </div>
-          
           <div>
           </div>
-          <div className=" bg-gradient-to-br from-blue-100 via-white to-blue-200 border border-blue-300 rounded-xl p-4 shadow mb-4 w-full max-w-xl mx-auto">
+          <div className=" bg-gradient-to-br bg-white border rounded-xl p-4 shadow mb-4 w-full max-w-xl mx-auto">
             <div className="font-semibold mb-2 text-base text-blue-900">Q{currentQuestion + 1}. {q.question}</div>
             <div className="mb-2">
               {Object.entries(q.options).map(([key, value]) => {
@@ -102,11 +101,10 @@ export default function Quizzes({ apiResponse, selectedOptions, setSelectedOptio
             >
               Previous
             </button>
-            <span className="text-base font-semibold text-blue-700">{currentQuestion + 1} / {totalQuestions}</span>
             <button
               onClick={() => setCurrentQuestion((prev) => Math.min(prev + 1, totalQuestions - 1))}
               disabled={currentQuestion === totalQuestions - 1}
-              className="px-4 py-1 rounded bg-blue-500 text-white font-medium shadow hover:bg-blue-700 transition-all disabled:opacity-50 text-sm"
+              className="px-4 py-1 rounded bg-blue-500 text-white font-medium shadow hover:bg-blue-600 transition-all disabled:opacity-50 text-sm"
             >
               Next
             </button>
@@ -128,7 +126,7 @@ export default function Quizzes({ apiResponse, selectedOptions, setSelectedOptio
             <div className="relative group mt-6">
               <button
                 disabled
-                className="px-6 py-2 rounded-lg bg-green-500 text-white font-bold shadow opacity-50 cursor-not-allowed text-base"
+                className="px-6 py-2 rounded-lg bg-blue-500 text-white font-bold shadow opacity-50 cursor-not-allowed text-base"
               >
                 Submit Quiz
               </button>
@@ -142,7 +140,11 @@ export default function Quizzes({ apiResponse, selectedOptions, setSelectedOptio
       </div>
     );
   } catch {
-    return <pre>{apiResponse}</pre>;
+    return <div className="h-[40rem] flex flex-col justify-center items-center px-4">
+      <h1 className="text-2xl font-bold text-center">
+        Error: Invalid API Response
+      </h1>
+    </div>;
   }
 }
 

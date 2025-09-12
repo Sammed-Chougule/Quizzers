@@ -78,12 +78,12 @@ Generate quiz for: "${topic}"`;
         body: JSON.stringify({ message: quizPrompt }),
       });
       const data = await response.json();
-      
+
       let cleanedData;
       if (data.response && typeof data.response === 'string') {
         cleanedData = data.response.replace(/```json\s*/, '').replace(/\s*```$/, '');
         try {
-          const quizData = JSON.parse(cleanedData);   
+          const quizData = JSON.parse(cleanedData);
           setApiResponse(JSON.stringify(quizData, null, 2));
         } catch (parseError) {
           console.log("Parse error:", parseError);
@@ -104,7 +104,7 @@ Generate quiz for: "${topic}"`;
       <div className="h-[40rem] flex flex-col justify-center items-center px-4">
         {!loading ? (
           <>
-          <BackgroundRippleEffect />
+            <BackgroundRippleEffect />
             <h2 className="mb-10 sm:mb-20 text-xl text-center sm:text-5xl dark:text-white text-black">
               Ask <span className="text-blue-500 font-bold">Quizzers</span> for a Quiz
             </h2>
@@ -116,10 +116,15 @@ Generate quiz for: "${topic}"`;
             />
           </>
         ) : (
-          <LoaderFive text="Generating Quiz..." />
+          <div>
+            <BackgroundRippleEffect />
+            <LoaderFive text="Generating Quiz..." />
+          </div>
+
         )}
       </div>
-    ) : (
+    ) : (<div>
+      <BackgroundRippleEffect />
       <div className="h-[40rem] flex flex-col justify-center items-center px-4">
         <Quizzes
           apiResponse={apiResponse}
@@ -128,18 +133,19 @@ Generate quiz for: "${topic}"`;
           currentQuestion={currentQuestion}
           setCurrentQuestion={setCurrentQuestion}
         />
-        <button
+        {/* <button
           onClick={() => {
             setApiResponse("");
             setQuizType("");
             setCurrentQuestion(0);
             setSelectedOptions({});
           }}
-          className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
+          className="flex items-center justify-center px-6 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors"
         >
           Generate Another Quiz
-        </button>
+        </button> */}
       </div>
+    </div>
     )
   );
 }
