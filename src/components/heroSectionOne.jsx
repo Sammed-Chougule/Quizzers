@@ -70,16 +70,17 @@ export function HeroSectionOne() {
                     }}
                     className="relative z-10 mt-8 flex flex-wrap items-center justify-center gap-4">
                     <Link href="/quizzes">
-
                         <button
-            className="w-60 transform rounded-lg bg-blue-500 px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+                            className="w-60 transform rounded-lg bg-blue-500 px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-blue-700 dark:bg-white dark:text-black dark:hover:bg-gray-200">
                             Start a Free Quiz
                         </button>
                     </Link>
+                    <Link href="/login">
                     <button
                         className="w-60 transform rounded-lg border border-gray-300 bg-white px-6 py-2 font-medium text-black transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-100 dark:border-gray-700 dark:bg-black dark:text-white dark:hover:bg-gray-900">
-                        Watch 2-min Demo
+                        Login
                     </button>
+                    </Link>
                     <motion.p
                         initial={{
                             opacity: 0,
@@ -95,7 +96,20 @@ export function HeroSectionOne() {
                         Build rock-solid any skills at warp speed
                     </motion.p>
 
+                    <div className="w-full overflow-hidden rounded-xl border border-gray-300 dark:border-gray-700">
 
+                        <video
+                            src="/quizzers_demo.mp4"
+                            alt="Landing page preview"
+                            className="aspect-[16/9] h-auto w-full object-cover"
+                            height={1000}
+                            width={1000}
+                            autoPlay
+                            loop
+                            muted
+                            playsInline
+                        />
+                    </div>
                 </motion.div>
 
             </div>
@@ -105,21 +119,24 @@ export function HeroSectionOne() {
 
 const Navbar = () => {
     return (
-        <nav
-            className="flex w-full items-center justify-between border-t border-b border-neutral-200 px-4 py-4 dark:border-neutral-800">
-            {/* <div className="flex items-center gap-2">
+        <div>
 
-                <div />
-                <img src="/quizzers_logo.png" alt="Logo" className="h-8 w-8 md:h-12 md:w-12" />
-                <h1 className="text-base font-bold md:text-2xl">Quizzers</h1>
-            </div> */}
-            {/* <Link href="/login">
-            <button
-                className="w-24 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 md:w-32 dark:bg-white dark:text-black dark:hover:bg-gray-200">
-                Login
-            </button>
-            </Link> */}
-            
-        </nav>
+        </div>
+        // <nav
+        //     className="flex w-full items-center justify-between border-t border-b border-neutral-200 px-4 py-4 dark:border-neutral-800">
+        //     {/* <div className="flex items-center gap-2">
+
+        //         <div />
+        //         <img src="/quizzers_logo.png" alt="Logo" className="h-8 w-8 md:h-12 md:w-12" />
+        //         <h1 className="text-base font-bold md:text-2xl">Quizzers</h1>
+        //     </div> */}
+        //     {/* <Link href="/login">
+        //     <button
+        //         className="w-24 transform rounded-lg bg-black px-6 py-2 font-medium text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-gray-800 md:w-32 dark:bg-white dark:text-black dark:hover:bg-gray-200">
+        //         Login
+        //     </button>
+        //     </Link> */}
+
+        // </nav>
     );
 };
