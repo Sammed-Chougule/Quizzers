@@ -1,5 +1,6 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import { Navbar } from "@/components/navBar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -53,6 +54,7 @@ export default function RootLayout({ children }) {
       >
         <div className="min-h-screen flex flex-col max-w-3xl mx-auto px-4">
           {/* Header appears on ALL pages */}
+          <Navbar />
           {/* Main content area */}
           <main className="flex-grow">{children}</main>
           {/* Footer appears on ALL pages */}

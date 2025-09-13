@@ -4,6 +4,7 @@ import { PlaceholdersAndVanishInput } from "./ui/placeholders-and-vanish-input";
 import { LoaderFive } from "./ui/loader";
 import Quizzes from "./quizzes";
 import { BackgroundRippleEffect } from "./ui/background-ripple-effect";
+import { AuroraBackground } from "./ui/aurora-background";
 
 export function PlaceholdersAndVanishInputDemo() {
   const [quizType, setQuizType] = useState("");
@@ -104,8 +105,8 @@ Generate quiz for: "${topic}"`;
       <div className="h-[40rem] flex flex-col justify-center items-center px-4">
         {!loading ? (
           <>
-            <BackgroundRippleEffect />
-            <h2 className="mb-10 sm:mb-20 text-xl text-center sm:text-5xl dark:text-white text-black">
+          <AuroraBackground className="absolute inset-0">
+              <h2 className="mb-10 sm:mb-20 text-xl text-center sm:text-5xl dark:text-white text-black">
               Ask <span className="text-blue-500 font-bold">Quizzers</span> for a Quiz
             </h2>
             <PlaceholdersAndVanishInput
@@ -114,11 +115,13 @@ Generate quiz for: "${topic}"`;
               onSubmit={onSubmit}
               disabled={loading}
             />
+          </AuroraBackground>
           </>
         ) : (
           <div>
-            <BackgroundRippleEffect />
-            <LoaderFive text="Generating Quiz..." />
+            <AuroraBackground className="absolute inset-0">
+            <LoaderFive text={`Generating Quiz for ${quizType}...`} />
+            </AuroraBackground>
           </div>
 
         )}
@@ -126,13 +129,13 @@ Generate quiz for: "${topic}"`;
     ) : (<div>
       <BackgroundRippleEffect />
       <div className="h-[40rem] flex flex-col justify-center items-center px-4">
-        <Quizzes
-          apiResponse={apiResponse}
-          selectedOptions={selectedOptions}
-          setSelectedOptions={setSelectedOptions}
-          currentQuestion={currentQuestion}
-          setCurrentQuestion={setCurrentQuestion}
-        />
+          <Quizzes
+            apiResponse={apiResponse}
+            selectedOptions={selectedOptions}
+            setSelectedOptions={setSelectedOptions}
+            currentQuestion={currentQuestion}
+            setCurrentQuestion={setCurrentQuestion}
+          />
         {/* <button
           onClick={() => {
             setApiResponse("");
