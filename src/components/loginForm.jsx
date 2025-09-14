@@ -76,7 +76,7 @@ export function CardDemo() {
                 onChange={(e) => setPassword(e.target.value)}
               />
             </div>
-            <Button type="submit" className="w-full">
+            <Button type="submit" className="w-full bg-blue-500 hover:bg-blue-600">
               Login
             </Button>
           </div>
