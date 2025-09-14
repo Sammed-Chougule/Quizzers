@@ -105,7 +105,7 @@ Generate quiz for: "${topic}"`;
       <div className="h-[40rem] flex flex-col justify-center items-center px-4">
         {!loading ? (
           <>
-          <AuroraBackground className="absolute inset-0">
+          <BackgroundRippleEffect />
               <h2 className="mb-10 sm:mb-20 text-xl text-center sm:text-5xl dark:text-white text-black">
               Ask <span className="text-blue-500 font-bold">Quizzers</span> for a Quiz
             </h2>
@@ -115,13 +115,11 @@ Generate quiz for: "${topic}"`;
               onSubmit={onSubmit}
               disabled={loading}
             />
-          </AuroraBackground>
           </>
         ) : (
           <div>
-            <AuroraBackground className="absolute inset-0">
+            <BackgroundRippleEffect />
             <LoaderFive text={`Generating Quiz for ${quizType}...`} />
-            </AuroraBackground>
           </div>
 
         )}

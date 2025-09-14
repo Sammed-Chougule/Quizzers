@@ -34,7 +34,7 @@ export function CardDemo() {
   }
 
   return (
-    <Card className="w-full max-w-sm">
+    <Card className="w-full max-w-sm z-50 hover:shadow-xl transition-all duration-300  ">
       <CardHeader>
         <CardTitle>Login to your account</CardTitle>
         <CardDescription>
